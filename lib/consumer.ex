@@ -1,7 +1,7 @@
 defmodule Kong.Consumer do
   @endpoint "/consumers"
 
-  import Kong, only: [get: 1, patch: 2, put: 2, delete: 1]
+  import Kong, only: [get: 1, get: 3, patch: 2, put: 2, delete: 1]
 
   @doc """
   Retrieve Consumer
@@ -11,12 +11,13 @@ defmodule Kong.Consumer do
   @doc """
   List Consumers
   """
-  def list, do: get(@endpoint)
+  def list(opts \\ []), do: get(@endpoint, [], params: opts)
 
   @doc """
   Update Consumer
   """
-  def update(username_or_id, attributes), do: patch(@endpoint <> "/#{username_or_id}", attributes)
+  def update(%{:id => id} = attributes), do: patch(@endpoint <> "/#{id}", attributes)
+  def update(%{:name => name} = attributes), do: patch(@endpoint <> "/#{name}", attributes)
 
   @doc """
   Update Or Create Consumer

@@ -1,7 +1,7 @@
 defmodule Kong.API do
   @endpoint "/apis"
 
-  import Kong, only: [get: 1, post: 2, patch: 2, put: 2, delete: 1]
+  import Kong, only: [get: 1, get: 3, post: 2, patch: 2, put: 2, delete: 1]
 
   @doc """
   Add API
@@ -16,12 +16,13 @@ defmodule Kong.API do
   @doc """
   List APIs
   """
-  def list, do: get(@endpoint)
+  def list(opts \\ []), do: get(@endpoint, [], params: opts)
 
   @doc """
   Update API
   """
-  def update(name_or_id, attributes), do: patch(@endpoint <> "/#{name_or_id}", attributes)
+  def update(%{:id => id} = attributes), do: patch(@endpoint <> "/#{id}", attributes)
+  def update(%{:name => name} = attributes), do: patch(@endpoint <> "/#{name}", attributes)
 
   @doc """
   Update Or Create API
