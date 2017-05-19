@@ -4,7 +4,7 @@ defmodule Kong do
   use HTTPoison.Base
 
   def process_url(url) do
-    Application.get_env(:kong, :host, "http://localhost:8001")<> url
+    Application.get_env(:kong, :host, "http://localhost:8001") <> url
   end
 
   def process_response_body(body) do
@@ -55,6 +55,8 @@ defmodule Kong do
       {:ok, %HTTPoison.Response{status_code: 400, body: body}} ->
         {:error, body}
       {:ok, %HTTPoison.Response{status_code: 404, body: body}} ->
+        {:error, body}
+      {:ok, %HTTPoison.Response{status_code: 500, body: body}} ->
         {:error, body}
       {:error, %HTTPoison.Error{reason: reason}} ->
         {:error, reason}
