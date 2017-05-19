@@ -21,8 +21,7 @@ defmodule Kong.API do
   @doc """
   Update API
   """
-  def update(%{:id => id} = attributes), do: patch(@endpoint <> "/#{id}", attributes)
-  def update(%{:name => name} = attributes), do: patch(@endpoint <> "/#{name}", attributes)
+  def update(name_or_id, attributes), do: patch(@endpoint <> "/#{name_or_id}", attributes)
 
   @doc """
   Update Or Create API
@@ -33,4 +32,29 @@ defmodule Kong.API do
   Remove API
   """
   def remove(name_or_id), do: delete(@endpoint <> "/#{name_or_id}")
+
+  @doc """
+  Add Plugin to API
+  """
+  def add_plugin(name_or_id, attributes), do: post(@endpoint <> "/#{name_or_id}/plugins", attributes)
+
+  @doc """
+  List Plugins per API
+  """
+  def list_plugins(name_or_id, opts \\ []), do: get(@endpoint <> "/#{name_or_id}/plugins", [], params: opts)
+
+  @doc """
+  Update Plugin
+  """
+  def update_plugin(name_or_id, plugin_name_or_id, attributes), do: patch(@endpoint <> "/#{name_or_id}/plugins/#{plugin_name_or_id}", attributes)
+
+  @doc """
+  Update or Add Plugin
+  """
+  def update_or_add_plugin(name_or_id, attributes), do: put(@endpoint <> "/#{name_or_id}/plugins", attributes)
+
+  @doc """
+  Remove Plugin
+  """
+  def remove_plugin(name_or_id, plugin_name_or_id), do: delete(@endpoint <> "/#{name_or_id}/#{plugin_name_or_id}")
 end

@@ -56,6 +56,8 @@ defmodule Kong do
         {:error, body}
       {:ok, %HTTPoison.Response{status_code: 404, body: body}} ->
         {:error, body}
+      {:ok, %HTTPoison.Response{status_code: 409, body: body}} ->
+        {:error, body}
       {:ok, %HTTPoison.Response{status_code: 500, body: body}} ->
         {:error, body}
       {:error, %HTTPoison.Error{reason: reason}} ->
