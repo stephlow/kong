@@ -32,7 +32,7 @@ defmodule Kong.Mixfile do
   defp package do
     [
       name: :kong,
-      files: ["lib", "priv", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
+      files: ["lib", "mix.exs", "README.md", "LICENSE"],
       maintainers: ["Stephan Lagerwaard"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/stephlow/kong"}
