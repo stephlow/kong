@@ -1,7 +1,7 @@
 defmodule Kong.Plugin do
   @endpoint "/plugins"
 
-  import Kong, only: [get: 1, get: 3, post: 2, patch: 2, put: 2, delete: 1]
+  import Kong, only: [get: 1, get: 3, post: 2]
 
   @doc """
   Add Plugin to all APIs
