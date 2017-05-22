@@ -7,6 +7,8 @@ defmodule Kong do
     Application.get_env(:kong, :host, "http://localhost:8001") <> url
   end
 
+  def process_response_body(""), do: %{}
+
   def process_response_body(body) do
     body
     |> Poison.decode!
